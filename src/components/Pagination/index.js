@@ -1,6 +1,7 @@
 import React from "react"
 import * as S from "./styled"
-import { Link } from "gatsby"
+import AniLink from "gatsby-plugin-transition-link/AniLink";
+import getThemeColor from "../../utils/getThemeColor"
 import propTypes from "prop-types"
 
 const Pagination = ({
@@ -12,11 +13,11 @@ const Pagination = ({
   nextPage,
 }) => (
   <S.PaginationWrapper>
-    {!isFirst && <Link to={prevPage}>Página anterior</Link>}
+    {!isFirst && <AniLink to={prevPage} cover direction="left" bg={getThemeColor()} duration={0.6}>Página anterior</AniLink>}
     <p>
       {currentPage} de {numPages}
     </p>
-    {!isLast && <Link to={nextPage}>Próxima página</Link>}
+    {!isLast && <AniLink to={nextPage} cover direction="right" bg={getThemeColor()} duration={0.6}>Próxima página</AniLink>}
   </S.PaginationWrapper>
 )
 
@@ -24,7 +25,7 @@ Pagination.propTypes = {
   isFirst: propTypes.bool.isRequired,
   isLast: propTypes.bool.isRequired,
   currentPage: propTypes.number.isRequired,
-  numPage: propTypes.number.isRequired,
+  numPages: propTypes.number.isRequired,
   prevPage: propTypes.string,
   nextPage: propTypes.string,
 }
